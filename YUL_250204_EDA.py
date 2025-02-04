@@ -29,8 +29,8 @@ selected_years = st.sidebar.multiselect("Select Years:", available_years, defaul
 # Filter data
 df_filtered = df_analyze[df_analyze['Year'].isin(selected_years)]
 
-# Compute monthly correlation, excluding 'OBS_TIME'
-df_corr = df_filtered.drop(columns=['OBS_TIME'])
+# Compute monthly correlation, excluding 'OBS_TIME' and 'Year'
+df_corr = df_filtered.drop(columns=['OBS_TIME', 'Year'])
 monthly_corr = df_corr.groupby('Month').corr()[selected_feature].unstack()
 if selected_feature in monthly_corr.columns:
     monthly_corr.drop(columns=selected_feature, inplace=True)
